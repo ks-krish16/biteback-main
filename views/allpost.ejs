@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/display.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Birthstone&family=Chocolate+Classical+Sans&family=Knewave&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Staatliches&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+</head>
+<body>
+    <div class="main">
+        <header>
+            <nav>
+                <a href="/" style="text-decoration: none; color: black;"><h1>BiteBack</h1></a>
+                <div class="header">
+                    <li><a href="/"><h3>Home</h3></a></li>
+                    <li><a href="/about"><h3>about us</h3></a></li>
+                    <li><a><h3>donate</h3></a></li>
+                    <li><a href="/contact"><h3>contact</h3></a></li>
+                </div>
+            </nav>
+        </header>
+        <section>
+            <div class="postContainer" >
+
+            </div>
+
+        </section>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    fetchPost(); 
+    emailjs.init("1MqmP0ZEm9JTE2m7n"); // Initialize EmailJS
+});
+    async function fetchPost() {
+
+
+    try {
+        const response = await fetch(`http://localhost:8080/allpost`);
+        const posts = await response.json();
+       
+
+        if (response.ok) {
+            displayPost(posts);
+        } else {
+            console.log("Error fetching post");
+        }
+    } catch (err) {
+        console.log("Error:", err);
+    }
+}
+
+function displayPost(posts) {
+        const container = document.querySelector(".postContainer");
+        container.innerHTML = ""; // Clear previous content
+
+        posts.forEach(post => {
+            const postElement = document.createElement("div");
+            postElement.classList.add("post");
+
+            postElement.innerHTML = `
+                <p class="user">${post.username}</p>
+                <h3 class="name">${post.foodname}</h3>
+                <p class="quantity">Quantity: ${post.quantity}</p>
+                <p class="desc">Description:${post.description}</p>
+                <p class="contact">Contact: ${post.contact}</p>
+                ${post.image ? `<img src="data:image/png;base64,${post.image}" alt="Food Image" width="200">` : ""}
+                <br><button class="contact-btn">Contact Now</button>
+
+            `;
+
+            container.appendChild(postElement);
+            const contactButton = postElement.querySelector(".contact-btn");
+        contactButton.addEventListener("click", function () {
+            sendEmail(post); })
+        });
+    }
+  
+ 
+
+    function sendEmail(post) {
+    emailjs.send("service_noyur9i", "template_f5s1cos", {
+        to_email: post.email, 
+        from_name: post.username,
+        message: `Name: ${post.foodname}
+                  Quantity: ${post.quantity}
+                  Description: ${post.description}
+                  number:${post.contact}`
+    })
+    .then(() => alert("Email sent successfully!"))
+    .catch(error => console.error("Email failed:", error));
+}
+  
+</script>        
+</body>
+</html>

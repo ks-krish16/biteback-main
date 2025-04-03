@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+
+
+        <div class="container">
+            <nav>
+                <a href="/" style="text-decoration: none; color: white;"><h1>BiteBack</h1></a>
+                <div class="header">
+                <h3>Your Profile</h3>
+                </div>
+            
+            </nav>
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="avatar">
+                
+                        <img id="profile-img" src="" alt="Profile Picture" >
+                    </div>
+                    <input type="file" id="profile-pic" accept="image/*" style="text-align: center;">
+                    <button onclick="uploadPic()">Upload</button>
+                    <h1>Profile</h1>
+                </div>
+                
+                <div class="profile-info">
+                    <div class="info-item">
+                        <span class="label" id=>Username</span>
+                        <span class="value" id="username"></span>
+                    </div>
+                    
+                    <div class="info-item">
+                        <span class="label">Email</span>
+                        <span class="value" id="email"></span>
+                    </div>
+                </div>
+                
+                <button class="logout-button" onclick="logout()">Logout</button>
+            </div>
+        </div>
+        <script>
+            // Retrieve stored values
+            const email = localStorage.getItem("email");
+            const username = localStorage.getItem("username");
+            const storedProfilePic = localStorage.getItem("profile-img"); // Correct key
+        
+            // Set username and email
+            document.getElementById("username").innerText = username || "Unknown";
+            document.getElementById("email").innerText = email || "Unknown";
+        
+            // Display stored profile picture if available
+            if (storedProfilePic) {
+                document.getElementById("profile-img").src = storedProfilePic;
+            } else {
+                document.getElementById("profile-img").src = "https://via.placeholder.com/150"; // Default image
+            }
+        
+            // Upload Profile Picture
+            function uploadPic() {
+                const fileInput = document.getElementById("profile-pic");
+                const file = fileInput.files[0];
+        
+                if (!file) {
+                    alert("Please select an image.");
+                    return;
+                }
+        
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function () {
+                    const profilePic = reader.result; // Convert image to Base64
+        
+                    localStorage.setItem("profile-img", profilePic); // Save to local storage
+                    document.getElementById("profile-img").src = profilePic; // Update displayed image
+                    alert("Profile picture updated!");
+                };
+            }
+        
+            // Logout function
+            function logout() {
+                localStorage.clear();
+                window.location.href = "/";
+            }
+        </script>
+        
+</body>
+</html>

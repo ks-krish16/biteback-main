@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/upload.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Birthstone&family=Chocolate+Classical+Sans&family=Knewave&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Staatliches&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="main">
+        <header>
+            <nav>
+                <a href="/" style="text-decoration: none; color: black;"><h1>BiteBack</h1></a>
+                <div class="header">
+                    <li><a href="/"><h3>Home</h3></a></li>
+                    <li><a href="/about"><h3>about us</h3></a></li>
+                    <li><a><h3>donate</h3></a></li>
+                    <li><a href="/contact"><h3>contact</h3></a></li>
+                </div>
+            </nav>
+        </header>
+        
+            
+        
+            
+        <section>
+          
+                <form class="form" method="POST">
+                    <div class="input">
+                        <div><input type="text" id="foodName" placeholder="Food Name" required></div>
+                        <div><input type="number" id="quantity" placeholder="Quantity" required></div>
+                        <div><input type="text" id="number" placeholder="number" required></div>
+                    </div>
+                    
+                    
+                
+                    <label for="file-input" class="drop-container">
+                        <span class="drop-title">Drop files here</span>
+                        <input type="file" accept="image/*" required="" id="file-input">
+                        <span class="form-title">Upload your file</span>
+                        <p class="form-paragraph">
+                            File should be an image
+                        </p>
+                        <div id="imagePreview" style="display: none;">
+                            <div><img id="previewImage" alt="Food Image Preview" width="200"></div>
+                            <div><button id="removeImage">Remove</button></div>
+                        </div>
+                    </label>
+                    <textarea id="description" placeholder="Description"></textarea>
+                    <div><button id="submitBtn" onclick="uploadPost()">
+                        <span class="transition"></span>
+                        <span class="gradient"></span>
+                        <span class="label">submit</span>
+                    </button></div>
+                </form>
+                <a href="/postDetailsPage"><button style="width: 150px;" >view my post</button></a>
+            
+        </section>
+    </div>
+
+    <script src="/hotel.js"></script>
+</body>
+</html>
