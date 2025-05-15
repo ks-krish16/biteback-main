@@ -22,6 +22,9 @@ app.set("view engine","ejs");
 
 
 
+app.get("/",(req,res)=>{
+    res.render("landingpage.ejs");
+})
 app.get("/home",(req,res)=>{
     res.render("home.ejs");
 })
