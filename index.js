@@ -158,9 +158,7 @@ app.get("/allpost", async (req, res) => {
     res.json(posts);
 });
 
-app.listen(port,()=>{
-    console.log(`listening to ${port}`)
-})
+
 
 app.listen(port,()=>{
     console.log(`listening to ${port}`)
